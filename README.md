@@ -20,4 +20,4 @@ Source codes are located in the **src/** directory:
 
 Technologies used: **Babel, ESLint, JavaScript (ES6+), JSX, PostCSS, React, Redux, Sass, webpack**
 
-If you have any questions or comments, please contact me. Thanks for looking! :smile:
+If you have any questions or comments, please contact me. Thanks for looking!
