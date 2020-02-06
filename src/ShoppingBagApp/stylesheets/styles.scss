@@ -1,0 +1,403 @@
+// import partials
+@import "variables";
+@import "mixins";
+@import "placeholders";
+
+#ShoppingBagApp {
+  .GenericPanel-msg-panel {
+    h4 {
+      background-color: $color-forest;
+    }
+
+    .GenericPanel-btn-close { // 'X' icon
+      color: $color-black;
+    }
+  }
+
+  a {
+    color: #97cbc1;
+  }
+
+  img {
+    border: 1px solid $border-color;
+  }
+
+  .ShoppingBagHeader {
+    width: 100%;
+    text-align: right;
+    padding: 0 0.5em;
+    background-color: $color-forest;
+  }
+
+  .ShoppingBagHeader-bag-icon {
+    background-color: $color-forest;
+    width: 33px;
+    height: 33px;
+    padding: 0;
+    border: 0;
+    box-shadow: none;
+
+    span {
+      display: inline-block;
+      background: url("../assets/bg-mylist.png") right center no-repeat;
+      text-indent: -10000px;
+      width: 25px;
+      height: 25px;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  // Change icon when bag is not empty
+  .ShoppingBagHeader-indicator {
+    span {
+      background: url("../assets/bg-mylist.png") left center no-repeat;
+    }
+  }
+
+  .ShoppingBagContent {
+    @include clear-fix;
+    background-color: $color-white;
+    padding-bottom: 1em;
+  }
+
+  // Empty bag messages
+  .EmptyShoppingBag {
+    float: left;
+    color: $color-grey;
+    font-size: 1.2rem;
+    font-style: italic;
+    width: 100%;
+    padding: 1em 0.5em;
+
+    p {
+      margin-bottom: 14px;
+    }
+
+    button {
+      font-size: 1rem;
+      background-color: $color-orange;
+      padding: 0.4em 0.8em;
+      margin: 0;
+      border: 1px solid $color-orange;
+      box-shadow: 2px 2px 5px 0 rgba($box-shadow-color, .2);
+
+      &:hover {
+        background-color: darken($color-orange, 2%);
+      }
+    }
+  }
+
+  // Basic list setting
+  .generalList {
+    @include flex-container;
+    width: 100%;
+  }
+
+  .generalList-item {
+    @include flex-container;
+    align-items: center;
+    justify-content: space-between;
+    flex: none;
+    width: 100%;
+    padding: 0.5em;
+    border-bottom: 1px solid $border-color;
+
+    @include mq-md-up {
+      justify-content: flex-end;
+      width: calc(100% / 2);
+
+      // Add right border to odd item
+      &:nth-of-type(2n+1) {
+        border-right: 1px solid $border-color;
+      }
+    }
+
+    > * {
+      flex: none;
+    }
+  }
+
+  .itemName {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 4px;
+
+    > * {
+      display: block;
+    }
+
+    span { // SKU#
+      font-size: 0.7rem;
+    }
+  }
+
+  .itemPhoto {
+    width: 40%;
+    text-align: center;
+
+    img {
+      width: 70%;
+      max-width: 50%;
+      min-width: 50px;
+    }
+  }
+
+  .itemPriceQty {
+    width: 60%;
+    text-align: right;
+  }
+
+  .qtyForm {
+    padding: 0.2em 0 0;
+
+    label {
+      display: inline-block;
+      font-weight: normal;
+      margin-right: 5px;
+    }
+
+    input {
+      display: inline-block;
+      height: 2em;
+      width: 3em;
+      text-align: center;
+      border: 1px solid $border-color;
+
+      &:invalid {
+        border: 1px solid $color-warn;
+      }
+    }
+  }
+
+  .btn-add {
+    cursor: pointer;
+    background-color: #97cbc1;
+    color: $color-white;
+    text-transform: uppercase;
+    width: 100%;
+    padding: 0.5em;
+    margin: 0.5em 0;
+    border: 1px solid #97cbc1;
+  }
+
+  // My item list
+  .ShoppingBagItems {
+
+    .generalList-item {
+      position: relative;
+      padding: 0.3em;
+
+      @include mq-md-up {
+        justify-content: flex-start;
+        width: 100%;
+
+        // Remove right border to odd item
+        &:nth-of-type(2n+1) {
+          border-right: 0;
+        }
+      }
+    }
+
+    .itemName {
+      order: 0;
+      width: 96%;
+
+      @include mq-md-up {
+        order: 2;
+        text-align: left;
+        width: 43%;
+        margin: 0;
+      }
+    }
+
+    .itemPhoto {
+      order: 0;
+      width: 35%;
+
+      @include mq-md-up {
+        order: 1;
+        width: 20%;
+      }
+
+      img {
+        @include mq-md-up {
+          width: 60px;
+          max-width: none;
+          height: 60px;
+        }
+      }
+    }
+
+    .itemPriceQty {
+      order: 0;
+      width: 65%;
+
+      @include mq-md-up {
+        order: 3;
+        width: 30%;
+      }
+    }
+
+    .itemTotal {
+      order: 0;
+      font-weight: bold;
+      text-align: right;
+      width: 100%;
+      margin-top: 0.5em;
+
+      @include mq-md-up {
+        order: 4;
+      }
+    }
+
+    .btn-remove {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      cursor: pointer;
+      color: $color-black;
+      background-color: transparent;
+      width: auto;
+      padding: 0;
+      margin: 0;
+      border: 0;
+      box-shadow: none;
+
+      &::after {
+        @extend %icon;
+        content: "\f00d";
+        font-size: 18px;
+      }
+
+      // Hide text
+      span {
+        @include hide-contents;
+      }
+    }
+  }
+
+  // TotalsPanel
+  .TotalsPanel-list {
+    width: 100%;
+    margin-top: 10px;
+    padding: 0 0.5em;
+    text-align: right;
+
+    li > * {
+      display: block;
+      width: 100%;
+
+      @include mq-md-up {
+        display: inline-block;
+      }
+    }
+
+    // Category name
+    b {
+      text-align: left;
+
+      @include mq-md-up {
+        text-align: right;
+        width: 40%;
+      }
+
+      &::after {
+        content: ": ";
+      }
+    }
+
+    // Total costs
+    span {
+      @include mq-md-up {
+        width: 60%;
+      }
+    }
+  }
+
+  .TotalsPanel-total {
+    font-weight: bold;
+    text-transform: uppercase;
+    border-top: 0;
+
+    @include mq-md-up {
+      border-top: 1px solid $color-black;
+    }
+  }
+
+  .checkOut {
+    @include word-wrap;
+    text-align: right;
+    width: 100%;
+    padding: 0 0.5em;
+    margin-top: 8px;
+    margin-bottom: 5px;
+
+    button {
+      margin: 0;
+      padding: 0.4em 0.8em;
+      box-shadow: 2px 2px 5px 0 rgba($box-shadow-color, .2);
+      background-color: $color-tan;
+      border: 1px solid $color-tan;
+
+      &:hover {
+        background-color: darken($color-tan, 2%);
+      }
+    }
+  }
+
+  // Item added message popup
+  .Popup {
+    position: absolute;
+    top: 40px;
+    right: 0.5em;
+    width: auto;
+    padding: 0.2em 1em;
+    background-color: #cbddea;
+    box-shadow: 2px 2px 5px 0 rgba($box-shadow-color, .2);
+
+    &::after {
+      // Create popup arrow
+      content: "";
+      position: absolute;
+      bottom: 100%;
+      right: 0.5em;
+      border-width: 8px;
+      border-style: solid;
+      border-color: transparent transparent #cbddea;
+    }
+  }
+
+  // Show and animate added message popup
+  .Popup-show {
+    display: block;
+    animation: fadeInOut 3s linear 0s 1;
+  }
+
+  // Hide added message popup
+  .Popup-hide {
+    display: none;
+  }
+
+  // Show-and-hide animation
+  @keyframes fadeInOut {
+    from {
+      opacity: 0;
+    }
+
+    40% {
+      opacity: 1;
+    }
+
+    70% {
+      opacity: 1;
+    }
+
+    to {
+      opacity: 0;
+    }
+  }
+
+}
