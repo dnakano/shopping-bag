@@ -1,5 +1,5 @@
 import React from 'react';
-import ErrorBoundary from 'Components/ErrorBoundary';
+import ErrorChecker from 'Components/ErrorChecker';
 import Spinner from 'Components/Spinner';
 import ShoppingBagContainer from './ShoppingBagContainer';
 import ProductList from './ProductList';
@@ -9,9 +9,9 @@ const Popup = React.lazy(() => import(/* webpackChunkName: 'Popup' */ 'Component
 
 function App() {
   return (
-    <div className="app-wrapper">
-      <React.StrictMode>
-        <ErrorBoundary>
+    <div className="apps-wrapper">
+      <ErrorChecker>
+        <>
           <ShoppingBagContainer />
           <ProductList />
           <React.Suspense fallback={<Spinner />}>
@@ -19,8 +19,8 @@ function App() {
               Item added to the bag
             </Popup>
           </React.Suspense>
-        </ErrorBoundary>
-      </React.StrictMode>
+        </>
+      </ErrorChecker>
     </div>
   );
 }

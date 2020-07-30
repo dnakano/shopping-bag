@@ -1,16 +1,20 @@
 import React from 'react';
+import Modal from 'Components/Modal';
 
-// Show spinner while loading via React.lazy()
+// Show spinner while loading
 function Spinner() {
+
+  const config = {
+    borders: 'round',
+    hideTitle: true,
+    position: 'center',
+    size: 'compact',
+  };
+
   return (
-    <div className="Spinner" role="presentation">
-      <div
-        className="Spinner-msg-panel"
-        role="presentation"
-      >
-        <p className="Spinner-msg">Loading...</p>
-      </div>
-    </div>
+    <Modal config={config}>
+      <p>Loading...</p>
+    </Modal>
   );
 }
 

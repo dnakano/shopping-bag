@@ -66,5 +66,40 @@ export const capitalize = (str) => {
   return words.join(' ');
 };
 
-// Create innerHTML text
-export const createMarkup = (markUp) => ({ __html: markUp });
+// Validate values
+export const isValidValue = (value, type = 'string') => {
+  // Make sure value matches the type
+  if (typeof value !== type) {
+    console.error(`isValidValue(): The value <${value}> has to be a ${type}.`);
+
+    return false;
+  }
+
+  return true;
+};
+
+// Validate set
+export const isValidSet = (value='', set=null) => {
+
+  if (!value) {
+    console.error('isValidSet: The <value> parameter is not defined.');
+
+    return false;
+  }
+
+  if (!set) {
+    console.error('isValidSet: The <set> parameter is not defined.');
+
+    return false;
+  }
+
+  // Make sure value is valid value in the set
+  if (!set.has(value)) {
+    console.error(`isValidSet: '${value}' is not a valid value. Expected one of [${[...set]}].`);
+
+    return false;
+  }
+
+  return true;
+};
+

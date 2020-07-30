@@ -1,9 +1,8 @@
 // import partials
 @import "variables";
 @import "mixins";
-@import "placeholders";
 
-.app-wrapper {
+.apps-wrapper {
   position: relative;
   width: 90%;
   height: 100%;
@@ -24,124 +23,4 @@
     margin: 0;
     border: 0;
   }
-}
-
-// GenericPanel component
-.GenericPanel {
-  @include mask($mask-bg-color, 0.8, $z-index-layer2);
-  width: 100%;
-  height: 100%;
-}
-
-.GenericPanel-msg-panel {
-  position: relative;
-  text-align: center;
-  background-color: $color-white;
-  width: 100%;
-  height: auto;
-  min-height: 150px;
-  padding: 0;
-  margin: 0;
-  border: 1px solid $border-color;
-  box-shadow: 2px 2px 5px 0 rgba($box-shadow-color, .2);
-
-  h4 {
-    color: $color-white;
-    background-color: $color-blue;
-    text-align: left;
-    width: 100%;
-    padding: 1em;
-    margin: 0 0 1em;
-  }
-}
-
-.GenericPanel-btn-close { // 'X' icon
-  position: absolute;
-  top: 0;
-  right: 0;
-  cursor: pointer;
-  color: $color-white;
-  background-color: transparent;
-  box-shadow: none;
-  padding: 10px 8px;
-  margin: 0;
-  border: 0;
-
-  &::after {
-    @extend %icon;
-    content: "\f00d";
-    font-size: 18px;
-  }
-
-  &:hover {
-    color: $color-white;
-    background-color: transparent;
-  }
-
-  // Hide text
-  span {
-    @include hide-contents;
-  }
-}
-
-// ErrorBoundary component
-.ErrorBoundary {
-  text-align: center;
-  width: 100%;
-  padding: 1em;
-
-  h4 {
-    color: $color-warn;
-    margin-bottom: 1em;
-
-    &::before {
-      @extend %icon;
-      content: "\f071";
-      font-size: 20px;
-      margin-right: 0.2em;
-    }
-  }
-
-  p {
-    margin-bottom: 1em;
-  }
-
-  details {
-    white-space: pre-wrap;
-    background-color: $color-grey-light;
-    padding: 0.8em;
-  }
-
-  summary {
-    font-weight: bold;
-    cursor: pointer;
-  }
-}
-
-.ErrorBoundary-description {
-  color: $color-warn;
-}
-
-// Spinner component
-.Spinner {
-  @include mask($mask-bg-color, 0.8, $z-index-layer2);
-  width: 100%;
-  height: 100%;
-}
-
-.Spinner-msg-panel {
-  @include absolute-center;
-  text-align: center;
-  background-color: $color-white;
-  width: 80%;
-  height: auto;
-  min-height: 150px;
-  padding: 0;
-  margin: 0;
-  border: 1px solid $border-color;
-  box-shadow: 2px 2px 5px 0 rgba($box-shadow-color, .2);
-}
-
-.Spinner-msg {
-  @include absolute-center;
 }

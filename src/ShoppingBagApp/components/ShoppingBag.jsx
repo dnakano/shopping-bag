@@ -1,60 +1,41 @@
-import Spinner from 'Components/Spinner';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import React from 'react';
+import Spinner from 'Components/Spinner';
 import ShoppingBagHeader from './ShoppingBagHeader';
 
-// Dynamically load ShoppingBagContent component and name it 'ShoppingBagContent' for webpackChunkName. For more info: https://webpack.js.org/guides/code-splitting/#dynamic-imports
-const ShoppingBagContent = React.lazy(() => import(/* webpackChunkName: 'ShoppingBagContent' */ './ShoppingBagContent'));
+// Dynamically load ShoppingBagBody component and name it 'ShoppingBagBody' for webpackChunkName. For more info: https://webpack.js.org/guides/code-splitting/#dynamic-imports
+const ShoppingBagBody = React.lazy(() => import(/* webpackChunkName: 'ShoppingBagBody' */ './ShoppingBagBody'));
 
-class ShoppingBag extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = { showBag: false };
+function ShoppingBag(props) {
+  // Use useState to track variable that is used to open/close shopping bag
+  const [showBag, setShowBag] = useState(false);
+
+  // Show shopping bag
+  function handleClick() {
+    setShowBag(true);
   }
-
-  // Change qty input
-  handleChange = (sku, qty) => (this.props.updateMyQty(sku, qty))
-
-  // Show / Hide shopping bag
-  handleClick = () => {
-    this.setState((prevState) => ({
-      showBag: !prevState.showBag,
-    }));
-  }
-
-  // Delete item
-  handleDeleteClick = (sku) => (this.props.deleteItem(sku))
 
   // Reset state
-  handleResetClick = () => {
-    this.setState({
-      showBag: false,
-    });
+  function handleCloseClick() {
+    setShowBag(false);
   }
 
-  render() {
-    const { myItems } = this.props;
-    const hasItems = myItems.length;
+  return (
+    <React.Fragment>
+      <ShoppingBagHeader hasItems={props.myItems.length} onClick={handleClick} />
 
-    return (
-      <React.Fragment>
-        <ShoppingBagHeader hasItems={hasItems} onClick={this.handleClick} />
-
-        {
-          this.state.showBag && (
-            <React.Suspense fallback={<Spinner />}>
-              <ShoppingBagContent
-                myItems={myItems}
-                onChange={this.handleChange}
-                onClick={this.handleDeleteClick}
-                onResetClick={this.handleResetClick}
-              />
-            </React.Suspense>
-          )
-        }
-      </React.Fragment>
-    );
-  }
+      {
+        showBag && (
+          <React.Suspense fallback={<Spinner />}>
+            <ShoppingBagBody
+              {...props}
+              onCloseClick={handleCloseClick}
+            />
+          </React.Suspense>
+        )
+      }
+    </React.Fragment>
+  );
 }
 
 ShoppingBag.propTypes = {
@@ -65,8 +46,6 @@ ShoppingBag.propTypes = {
     qty: PropTypes.node.isRequired,
     img: PropTypes.string.isRequired,
   }).isRequired).isRequired,
-  deleteItem: PropTypes.func.isRequired,
-  updateMyQty: PropTypes.func.isRequired,
 };
 
 export default ShoppingBag;

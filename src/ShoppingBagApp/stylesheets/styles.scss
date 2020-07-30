@@ -4,12 +4,20 @@
 @import "placeholders";
 
 #ShoppingBagApp {
-  .GenericPanel-msg-panel {
-    h4 {
+
+  // Customize ShoppingBagBody component's Modal styles
+  .ShoppingBagBody-modal {
+    .Modal-box {
+      border: 1px solid $color-grey-light;
+      box-shadow: 2px 2px 5px 0 rgba($color-grey, .2);
+    }
+
+    .Modal-box-title {
+      color: $color-white;
       background-color: $color-forest;
     }
 
-    .GenericPanel-btn-close { // 'X' icon
+    .Modal-btn-close {
       color: $color-black;
     }
   }
@@ -57,7 +65,7 @@
     }
   }
 
-  .ShoppingBagContent {
+  .ShoppingBagBody {
     @include clear-fix;
     background-color: $color-white;
     padding-bottom: 1em;

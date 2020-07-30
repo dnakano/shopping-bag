@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './stylesheets/ErrorBoundary.scss';
 
 // Error boundary component
 class ErrorBoundary extends React.Component {
@@ -21,16 +22,16 @@ class ErrorBoundary extends React.Component {
       error: null,
     };
   }
-  
+
   render() {
     if (this.state.hasError) {
       // Error found. Display error UI
 
       return (
         <div className="ErrorBoundary">
-          <h4>ERROR: FAILED TO RENDER APP!</h4>
+          <h4>ERROR: FAILED TO RENDER APPLICATION!</h4>
           <p>
-            Encountered an error while rendering this app.
+            Encountered an error while rendering the application.
           </p>
           <details open>
             <summary>Error Details</summary>
@@ -44,7 +45,7 @@ class ErrorBoundary extends React.Component {
       );
     }
 
-    // Normally, just render children
+    // No errors, just render children
     return this.props.children;
   }
 }
