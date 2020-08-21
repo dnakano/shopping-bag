@@ -1,5 +1,5 @@
 # Shopping Bag application
-The shopping bag application is written in [React](https://reactjs.org/) and [Redux](https://redux.js.org/) (for demonstration purpose only).
+The shopping bag application is written with [React](https://reactjs.org/) and [Redux](https://redux.js.org/) (for demonstration purpose only).
 
 The application is located on [my portfolio website](https://daisukenakano.com/index.php#spa).
 
